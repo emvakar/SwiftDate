@@ -453,17 +453,19 @@ class TestFormatters: XCTestCase {
 		XCTAssertNotNil(date2, "Wrong RSS Alt Date region")
 	}
 
+	#if os(Linux)
+	#else
 	func testTimeInterval_Clock() {
 		let value = (2.hours + 5.minutes).timeInterval.toClock()
 		XCTAssert(value == "02:05:00", "Failed to format clock")
-		#if os(Linux)
-		let zeroBehavior = DateComponentsFormatter.ZeroFormattingBehavior(rawValue: 14)
-		let value2 = (4.minutes + 50.minutes).timeInterval.toClock(zero: zeroBehavior)
-		XCTAssert(value2 == "54:00", "Failed to format clock")
-		#else
+//		#if os(Linux)
+//		let zeroBehavior = DateComponentsFormatter.ZeroFormattingBehavior(rawValue: 14)
+//		let value2 = (4.minutes + 50.minutes).timeInterval.toClock(zero: zeroBehavior)
+//		XCTAssert(value2 == "54:00", "Failed to format clock")
+//		#else
 		let value2 = (4.minutes + 50.minutes).timeInterval.toClock(zero: DateComponentsFormatter.ZeroFormattingBehavior.dropAll)
 		XCTAssert(value2 == "54", "Failed to format clock")
-		#endif
+//		#endif
 	}
 
 	func testFormatterCustom() {
@@ -498,6 +500,7 @@ class TestFormatters: XCTestCase {
 		XCTAssert(value1 == "2 hours, 5 minutes, 32 seconds", "Failed to format interval to string")
 		XCTAssert(value2 == "2d 5h", "Failed to format interval to string")
 	}
+	#endif
 
 	func testColloquialFormatter() {
 		let ago5Mins = DateInRegion() - 5.minutes

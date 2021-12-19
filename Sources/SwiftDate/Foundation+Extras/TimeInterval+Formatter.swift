@@ -12,6 +12,8 @@
 
 import Foundation
 
+#if os(Linux)
+#else
 public extension TimeInterval {
 
 	struct ComponentsFormatterOptions {
@@ -166,3 +168,4 @@ public extension TimeInterval {
 	}
 
 }
+#endif
