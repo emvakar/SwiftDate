@@ -62,8 +62,7 @@ extension Calendar.Identifier: CustomStringConvertible {
 		case .republicOfChina:		return "republicOfChina"
 		case .islamicTabular:		return "islamicTabular"
 		case .islamicUmmAlQura:		return "islamicUmmAlQura"
-		@unknown default:
-			fatalError("Unsupported calendar \(self)")
+        default:                    fatalError("Unsupported calendar \(self)")
 		}
 	}
 

@@ -1,0 +1,19 @@
+name: Tests
+
+on: [pull_request, workflow_dispatch, push]
+
+jobs:
+
+  test:
+    name: Test
+    runs-on: [self-hosted, ubuntu]
+    needs: [start]
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: swift build -v
+
+      - name: Run tests
+        run: swift test -v
